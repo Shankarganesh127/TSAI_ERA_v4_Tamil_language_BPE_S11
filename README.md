@@ -125,6 +125,8 @@ import re
 
 ## How to Run
 
+### 1. Train the Tokenizer (Notebook)
+
 1. Open `ERA_v4_Tamil_BPE_S11.ipynb` in Jupyter
 2. Execute cells sequentially
 3. The notebook will:
@@ -132,8 +134,37 @@ import re
    - Train BPE tokenizer
    - Display compression statistics
    - Demonstrate encoding/decoding
+4. Run the last cell to save the tokenizer (`merges.pkl` and `vocab.pkl`)
+
+### 2. Run the Gradio Web App
+
+After training the tokenizer, you can launch an interactive web interface:
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Launch the Gradio app
+python app.py
+```
+
+The app will provide:
+- 🔍 Interactive text input for Tamil text
+- 🎯 Token ID visualization
+- 📊 Real-time compression statistics
+- ✅ Encoding/decoding verification
+- 📋 Detailed token breakdown
+
+**Features:**
+- Live tokenization of Tamil text
+- Token-by-token breakdown showing which characters map to which IDs
+- Compression statistics (ratio, space savings)
+- Decode verification to ensure lossless encoding
+- Shareable public link for demos
 
 ## Example Usage
+
+### Programmatic Usage (Python)
 
 ```python
 # Encode Tamil text
@@ -144,6 +175,25 @@ print(tokens)  # [507, 399, 352, 536, 361, 547, 766, 294, 877]
 # Decode back to text
 decoded = decode(tokens)
 print(decoded)  # நான் தமிழ் பேசுகிறேன்
+```
+
+### Interactive Usage (Gradio App)
+
+The Gradio web interface (`app.py`) provides a user-friendly way to:
+
+1. **Enter Tamil text** in the input box
+2. **Click "Tokenize"** to see the token IDs
+3. **View statistics** including compression ratio and space savings
+4. **See token breakdown** showing each token ID and its corresponding text
+5. **Verify decoding** to ensure the tokenization is reversible
+
+Example output for "நான் தமிழ் பேசுகிறேன்":
+```
+Token IDs: [507, 399, 352, 536, 361, 547, 766, 294, 877]
+Original Bytes: 56
+Token Count: 9
+Compression Ratio: 6.22x
+Space Savings: 83.9%
 ```
 
 ## Future Enhancements
